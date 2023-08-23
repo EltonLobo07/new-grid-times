@@ -12,6 +12,22 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import { COLORS } from '../../constants';
+
+const separatedStoriesMap = (stories, Component) => {
+  return stories.map((story, index) => {
+    const common = <Component id = {story.id} {...story} />;
+    if (index > 0) {
+      return (
+        <>
+          <HorizontalDivider />
+          {common}
+        </>
+      );
+    }
+    return common;
+  }); 
+};
 
 const MainStoryGrid = () => {
   return (
@@ -22,18 +38,14 @@ const MainStoryGrid = () => {
 
       <SecondaryStorySection>
         <StoryList>
-          {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
-          ))}
+          {separatedStoriesMap(SECONDARY_STORIES, SecondaryStory)}
         </StoryList>
       </SecondaryStorySection>
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
         <StoryList>
-          {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
-          ))}
+          {separatedStoriesMap(OPINION_STORIES, OpinionStory)}
         </StoryList>
       </OpinionSection>
 
@@ -66,6 +78,13 @@ const SecondaryStorySection = styled.section`
 const StoryList = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const HorizontalDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${COLORS.gray[300]};
+  margin: 1rem 0;
 `;
 
 const OpinionSection = styled.section`
