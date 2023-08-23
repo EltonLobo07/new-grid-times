@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import MaxWidthWrapper from '../MaxWidthWrapper';
 
 import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES } from '../../constants';
 
 const Footer = () => {
   return (
@@ -26,15 +27,15 @@ const Footer = () => {
           <Social>
             <a href="/">
               <VisuallyHidden>
-                Visit The Grid Times on Facebook
-              </VisuallyHidden>
-              <Facebook size={20} />
-            </a>
-            <a href="/">
-              <VisuallyHidden>
                 Visit The Grid Times on Twitter
               </VisuallyHidden>
               <Twitter size={20} />
+            </a>
+            <a href="/">
+              <VisuallyHidden>
+                Visit The Grid Times on Facebook
+              </VisuallyHidden>
+              <Facebook size={20} />
             </a>
           </Social>
         </TopRow>
@@ -144,6 +145,12 @@ const TopRow = styled.div`
   font-size: 0.875rem;
   border-bottom: 1px solid var(--color-gray-700);
   padding: 24px 0;
+
+  @media (${QUERIES.tabletAndUp}) {
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 48px;
+  }
 `;
 
 const Social = styled.div`
@@ -170,6 +177,12 @@ const MainNavArea = styled.div`
   gap: 32px;
   padding: 32px 0 48px;
   text-align: center;
+
+  @media (${QUERIES.tabletAndUp}) {
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(${240 / 16}rem, 1fr));
+  }
 `;
 
 const MainNavHeading = styled.h2`
